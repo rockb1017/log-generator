@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: loggen
+spec:
+  parallelism: 1
+  template:
+    metadata:
+      labels:
+      annotations:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: loggen
+        image: rock1017/log-generator:latest
+        env:
+        - name: MESSAGE_COUNT
+          value: "500000"
+        - name: SIZE
+          value: "512"
+        - name: FREQ
+          value: "0.0001"
+      nodeSelector:
